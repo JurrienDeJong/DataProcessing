@@ -1,34 +1,31 @@
 SAMPLES = ['Sample1', 'Sample2', 'Sample3']
 
-result_folder = 'results'
+dataPath = "data/"
+resultPath = "results/"
 
 rule all:
     input:
-        expand(result_folder + '/{sample}.txt', sample = SAMPLES)
+        'test.txt'
 
 rule quantify_genes:
     input:
-        genome = 'data/genome.fa',
-        r1 = 'data/{sample}.R1.fastq.gz',
-        r2 = 'data/{sample}.R2.fastq.gz',
-        r3 = 'data/{sample}.R3.fastq.gz'
+        genome = dataPath + 'genome.fa',
+        r1 = 'fastq/{sample}.R1.fastq.gz',
+        r2 = 'fastq/{sample}.R2.fastq.gz',
+        r3 = 'fastq/{sample}.R3.fastq.gz'
     output:
-        result_folder + '/{sample}.txt'
-
+        resultPath + '{sample}.txt'
     shell:
         'echo {input.genome} {input.r1} {input.r2} {input.r3} > {output}'
 
-rule clean:
-    shell:
-        'rm results/*.txt'
-
-rule collect_samples:
+rule collate_outputs:
     input:
-        expand(result_folder + '/{sample}.txt', sample=SAMPLES)
+        expand(resultPath + '{sample}.txt', sample=SAMPLES)
     output:
-        result_folder + '/test.txt'
+        resultPath + 'test.txt'
     run:
         with open(output[0], 'w') as out:
-            for i in input[:-1]:
-                out.write(i.split("/")[1] + ", ")
-            out.write("and " + input[-1].split("/")[1] + " are successfully processed")
+            for i in input:
+                sample = i.split('.')[0]
+                for line in open(i):
+                    out.write(sample + ' ' + line)
