@@ -1,4 +1,0 @@
-Building DAG of jobs...
-MissingInputException in line 7 of /homes/jdejong/dataprocessing/snakemake-test/Snakefile:
-Missing input files for rule quantify_genes:
-genome.fa
