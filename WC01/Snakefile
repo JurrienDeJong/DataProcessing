@@ -18,6 +18,7 @@ rule quantify_genes:
     shell:
         'echo {input.genome} {input.r1} {input.r2} {input.r3} > {output}'
 
+
 rule collate_outputs:
     input:
         expand(resultPath + '{sample}.txt', sample=SAMPLES)
@@ -29,3 +30,7 @@ rule collate_outputs:
                 sample = i.split('.')[0]
                 for line in open(i):
                     out.write(sample + ' ' + line)
+
+rule clean:
+    shell:
+        'rm' + resultPath + '*.txt'
