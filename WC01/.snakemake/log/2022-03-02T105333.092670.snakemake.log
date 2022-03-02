@@ -1,0 +1,23 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Job stats:
+job                count    min threads    max threads
+---------------  -------  -------------  -------------
+collect_samples        1              1              1
+total                  1              1              1
+
+Select jobs to execute...
+
+[Wed Mar  2 10:53:33 2022]
+rule collect_samples:
+    input: results/Sample1.txt, results/Sample2.txt, results/Sample3.txt
+    output: results/test.txt
+    jobid: 0
+    resources: tmpdir=/tmp
+
+[Wed Mar  2 10:53:34 2022]
+Finished job 0.
+1 of 1 steps (100%) done
+Complete log: /homes/jdejong/dataprocessing/WC01/.snakemake/log/2022-03-02T105333.092670.snakemake.log
