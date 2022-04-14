@@ -1,0 +1,12 @@
+"""
+Main snakefile which runs all other files
+"""
+
+include: "bwa.smk"
+include: "samtools.smk"
+include: "markduplicates.smk"
+include: "bcftools.smk"
+
+rule all:
+    input:
+        'results/out.vcf'

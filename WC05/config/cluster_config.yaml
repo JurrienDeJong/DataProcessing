@@ -1,0 +1,10 @@
+# cluster_config.yml - cluster configuration
+__default__:
+    account: ACCOUNT
+    partition: assemblix # for example assemblix
+    time: 01:00:00 # time limit for each job
+    nodes: 1
+    ntasks-per-node: 14 #Request n cores be allocated per node.
+    chdir: /homes/crhazenberg/Thema11/Dataprocessing/tutorial_05/ #working dir
+    output: slurm_output-%j.out
+    error: slurm_error-%j.err
